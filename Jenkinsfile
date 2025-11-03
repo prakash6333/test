@@ -6,15 +6,13 @@ pipeline {
     }
 
     environment {
-        SONARQUBE_ENV = 'SonarQube'
+        SONARQUBE_ENV = 'sonarqube'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'a55006d1-b975-4901-96e1-d9b9dde6ac34',
-                    url: 'https://github.com/your-org/your-repo.git',
-                    branch: 'main'
+                git url: 'https://github.com/prakash6333/test.git', branch: 'main'
             }
         }
 
@@ -31,8 +29,8 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=my-app -Dsonar.projectName=my-app'
+                withSonarQubeEnv('sonarqube') {
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=test-app -Dsonar.projectName=test-app'
                 }
             }
         }
